@@ -36,6 +36,7 @@ func get_input():
 		velocity.y = jump_speed
 	if Input.is_action_pressed(("attack_default_%s") % id):
 		if attack_allowed:
+			$AnimatedSprite.play("attack_default")
 			attack_allowed = false
 			$DefaultAttackTimer.start(0.3)
 			var veno_attack_default = load("./VenoAttackDefault.tscn").instance()		
@@ -82,3 +83,8 @@ func _physics_process(delta):
 
 func _on_DefaultAttackTimer_timeout():
 	attack_allowed = true
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "attack_default":
+		$AnimatedSprite.animation = "idle"
