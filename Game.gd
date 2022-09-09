@@ -5,9 +5,11 @@ var respawn_position_2 = Vector2()
 
 func _ready():
 	var p1 = get_node("Player1")
-	respawn_position_1 = p1.position
+	if p1 != null:
+		respawn_position_1 = p1.position
 	var p2 = get_node("Player2")
-	respawn_position_2 = p2.position
+	if p2 != null:
+		respawn_position_2 = p2.position
 
 
 func _process(delta):
@@ -15,8 +17,9 @@ func _process(delta):
 	var p1 = get_node("Player1")
 	var p2 = get_node("Player2")
 	
-	if p1.position.y >= death_floor.position.y:
+	if p1 != null && p1.position.y >= death_floor.position.y:
 		p1.position = respawn_position_1
-	if p2.position.y >= death_floor.position.y:
+		
+	if p2 != null && p2.position.y >= death_floor.position.y:
 		p2.position = respawn_position_2
 	

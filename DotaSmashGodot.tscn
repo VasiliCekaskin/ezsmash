@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://TwoPlayerCamera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://PlayerHPBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Platform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=5]
 
@@ -41,3 +42,13 @@ max_jump_speed = 1300
 
 [node name="DeathFloor" type="Node2D" parent="."]
 position = Vector2( -99, 1383 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Player1HP" parent="CanvasLayer" instance=ExtResource( 3 )]
+player = NodePath("../../Player1")
+
+[node name="Player2HP" parent="CanvasLayer" instance=ExtResource( 3 )]
+margin_left = 722.0
+margin_right = 1008.0
+player = NodePath("../../Player2")

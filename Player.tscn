@@ -13,7 +13,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "attack_default"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -21,6 +21,7 @@ position = Vector2( 1.5, 23.5 )
 shape = SubResource( 1 )
 
 [node name="DefaultAttackTimer" type="Timer" parent="."]
+wait_time = 0.2
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="DefaultAttackTimer" to="." method="_on_DefaultAttackTimer_timeout"]

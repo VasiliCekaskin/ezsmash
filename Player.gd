@@ -11,6 +11,7 @@ var double_jump_allowed = false
 var velocity = Vector2()
 var direction = 1
 var attack_allowed = true
+var damage_factor = 1;
 
 func _ready():
 	if id == 1:
@@ -63,6 +64,11 @@ func get_input():
 
 func _process(delta):
 	get_input()
+	if damage_factor <= 0:
+		get_parent().remove_child(self)
+
+func get_id():
+	return id;
 
 func _physics_process(delta):
 	if jump_speed > 0:
@@ -86,3 +92,8 @@ func _on_DefaultAttackTimer_timeout():
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "attack_default":
 		$AnimatedSprite.animation = "idle"
+
+func handle_hit(body):
+	if body.identifier == "VenoAttackDefault":
+		self.damage_factor += 1;
+		move_and_slide(Vector2(damage_factor * body.direction * 100, 0), Vector2.UP)
