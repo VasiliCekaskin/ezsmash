@@ -25,7 +25,7 @@ func _ready():
 		$".".set_collision_mask_bit(0, false)
 		$".".set_collision_mask_bit(1, false)
 		$".".set_collision_mask_bit(2, true)
-
+		
 func get_input():
 	velocity.x = 0
 	if Input.is_action_pressed(("right_%s" % id)):
@@ -64,7 +64,7 @@ func get_input():
 func _process(delta):
 	get_input()
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	if jump_speed > 0:
 		jump_speed -= 30
 	else:
@@ -74,12 +74,10 @@ func _physics_process(delta):
 	
 	vel.y = -jump_speed
 	vel.y -= gravity
-	move_and_slide(vel, Vector2.UP);
+	var collision = move_and_slide(vel, Vector2.UP);
 
 	if is_on_floor():
 		jump_allowed = true
-
-
 
 func _on_DefaultAttackTimer_timeout():
 	attack_allowed = true
