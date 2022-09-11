@@ -28,14 +28,13 @@ func _ready():
 		$".".set_collision_mask_bit(2, true)
 		
 func get_input():
-	velocity.x = 0
 	if Input.is_action_pressed(("right_%s" % id)):
 		velocity.x = speed
 	if Input.is_action_pressed(("left_%s" % id)):
 		velocity.x = -speed
 	if Input.is_action_pressed(("down_%s") % id):
 		velocity.y = jump_speed
-	if Input.is_action_pressed(("attack_default_%s") % id):
+	if Input.is_action_just_pressed(("attack_default_%s") % id):
 		if attack_allowed:
 			$AnimatedSprite.play("attack_default")
 			attack_allowed = false
@@ -49,7 +48,7 @@ func get_input():
 		if double_jump_allowed:
 			double_jump_allowed = false
 			jump_speed = max_jump_speed
-		if jump_speed == 0 && jump_allowed:
+		if  jump_allowed:
 			jump_allowed = false
 			double_jump_allowed = true
 			jump_speed = max_jump_speed
@@ -64,13 +63,18 @@ func get_input():
 
 func _process(delta):
 	get_input()
-	if damage_factor <= 0:
+	if damage_factor >= 100:
 		get_parent().remove_child(self)
 
 func get_id():
 	return id;
 
 func _physics_process(delta):
+	if velocity.x > 0:
+		velocity.x = velocity.x - velocity.x / 100 * 20;
+	if velocity.x < 0:
+		velocity.x = velocity.x + (velocity.x / 100 * 20) * -1;
+	
 	if jump_speed > 0:
 		jump_speed -= 30
 	else:
@@ -96,4 +100,4 @@ func _on_AnimatedSprite_animation_finished():
 func handle_hit(body):
 	if body.identifier == "VenoAttackDefault":
 		self.damage_factor += 1;
-		move_and_slide(Vector2(damage_factor * body.direction * 100, 0), Vector2.UP)
+		velocity.x = damage_factor * body.direction * 10

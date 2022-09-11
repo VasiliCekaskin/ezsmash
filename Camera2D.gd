@@ -12,27 +12,12 @@ func _process(delta):
 	
 	var t1 = p1.position
 	var t2 = p2.position
-
-	position.x = (t1.x + t2.x) / 2
-	position.y = (t1.y + t2.y) / 2
 	
-	var zx = (sqrt(t1.x * t1.x) + sqrt(t2.x * t2.x)) / 4000
-	var zy = (sqrt(t1.y * t1.y) + sqrt(t2.y * t2.y)) / 4000
+	var distance = sqrt((t1.x - t2.x) * (t1.x - t2.x))
 	
-	var z = 0
+	var k = distance / 1000;
 	
-	if zx > zy:
-		z = zx
-	if zy > zx:
-		z = zy
+	if k >= 0.3 && 1.5 + k < 2.2:
+		zoom.x = 1.5 + k;
+		zoom.y = 1.5 + k;
 	
-	var z_min = 0.3
-	var z_max = 1
-	
-	if z < z_min:
-		z = z_min
-	if z > z_max:
-		z = z_max
-	
-	zoom.x = z * 5
-	zoom.y = z * 5

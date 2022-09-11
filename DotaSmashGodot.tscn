@@ -11,32 +11,19 @@ position = Vector2( 516, 300 )
 script = ExtResource( 1 )
 
 [node name="Platform1" parent="." instance=ExtResource( 4 )]
-position = Vector2( -16, -14 )
-
-[node name="Platform2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 568, -175 )
-
-[node name="Platform5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 919, -494 )
-
-[node name="Platform4" parent="." instance=ExtResource( 4 )]
-position = Vector2( -14, -423 )
-
-[node name="Platform3" parent="." instance=ExtResource( 4 )]
-position = Vector2( -535, -133 )
-
-[node name="Platform6" parent="." instance=ExtResource( 4 )]
-position = Vector2( -749, -537 )
+position = Vector2( -37, -25 )
+scale = Vector2( 1.86602, 1 )
 
 [node name="TwoPlayerCamera" parent="." instance=ExtResource( 2 )]
+zoom = Vector2( 1.5, 1.5 )
 
 [node name="Player1" parent="." instance=ExtResource( 5 )]
-position = Vector2( -828, -594 )
+position = Vector2( -289, -176 )
 id = 1
 max_jump_speed = 1300
 
 [node name="Player2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1022, -556 )
+position = Vector2( 334, -161 )
 id = 2
 max_jump_speed = 1300
 
